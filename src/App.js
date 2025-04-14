@@ -18,7 +18,7 @@ const [todo, setTodo] = useState([ //хранит базу данных
     status: true
   },
   {
-    id: 1,
+    id: 3,
     title: 'third todo',
     status: false
   },
