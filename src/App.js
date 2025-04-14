@@ -26,8 +26,8 @@ const [todo, setTodo] = useState([ //хранит базу данных
   return (
     <div className='App'>
 <Header />
-<AddTodo />
-<TodoList todo={todo} setTodo={setTodo}/> {/*передаем в компонент*/}
+<AddTodo todo={todo} setTodo={setTodo}/>
+<TodoList todo={todo} setTodo={setTodo}/> {/*передаем в компонент TodoList*/}
     </div>
   );
 }

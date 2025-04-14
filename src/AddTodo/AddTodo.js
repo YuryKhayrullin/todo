@@ -1,12 +1,18 @@
 
 import React, {useState} from 'react';
-
-function AddTodo () {
+function AddTodo ({todo, setTodo}) {
 
     const [value, setValue] = useState('')
 
-    function saveTodo() {
-
+    function saveTodo() { //
+setTodo(
+    [...todo, {
+        id: 4,
+        title: value,
+        status: true
+    }]
+)
+setValue('') //написали в placeholder, нажали сохранить и надпись стерлась
     }
     return (
         <div>
