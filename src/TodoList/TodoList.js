@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 
 function TodoList ({todo, setTodo}) {
 
-  const [edit, setEdit] = useState()
+  const [edit, setEdit] = useState(null)
   const [value, setValue] = useState()
 
 function deleteTodo (id) {     {/*получает id*/}
@@ -29,7 +29,7 @@ setValue(title)
     todo.map( item => (
       <div key={item.id}>
     {
-      edit == item.id? //если совпало id которое ввели с id которое перебрали map, то выводим input,button
+      edit == edit.id? //если совпало id которое ввели с id которое перебрали map, то выводим input,button
       <div>
         <input value={value}/>
        
