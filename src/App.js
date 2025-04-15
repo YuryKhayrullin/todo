@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from './Header/Header';
 import AddTodo from './AddTodo/AddTodo';
 import TodoList from './TodoList/TodoList';
+import { Container } from 'react-bootstrap';
 
 function App() {
   const [todo, setTodo] = useState([
@@ -23,12 +24,12 @@ function App() {
     },
   ]);
   return (
-    <div className="App">
+    <Container>
       <Header />
       <AddTodo todo={todo} setTodo={setTodo} />
       <TodoList todo={todo} setTodo={setTodo} />{' '}
       {/*передаем в компонент TodoList*/}
-    </div>
+    </Container>
   );
 }
 

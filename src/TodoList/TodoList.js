@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Row, Col, Button, FormControl } from 'react-bootstrap';
+import './TodoList.css';
 
 function TodoList({ todo, setTodo }) {
   const [edit, setEdit] = useState(null);
@@ -10,11 +12,12 @@ function TodoList({ todo, setTodo }) {
   }
 
   function statusTodo(id) {
-    let newTodo = [...todo].forEach((item) => {
+    let newTodo = [...todo].filter((item) => {
       //фильтруем todo, ищем элемент с таким же id, если такое есть, то статус todo меняем на противоположное значение
       if (item.id === id) {
         item.status = !item.status;
       }
+      return item
     });
     setTodo(newTodo);
   }
@@ -25,15 +28,26 @@ function TodoList({ todo, setTodo }) {
     setValue(title);
   }
 
+  function saveTodo(id) {
+    let newTodo = [...todo].map((item) => {
+      //нашли значение id и поменяли title на value
+      if (item.id == id) {
+        item.title = value;
+      }
+      return item;
+    });
+    setTodo(newTodo);
+    setEdit(null);
+  }
   return (
     <div>
       {todo.map((item) => (
-        <div key={item.id}>
+        <div key={item.id} className="listItems">
           {
             //если совпало id которое ввели с id которое перебрали map, то выводим input,button
             edit === item.id ? (
               <div>
-                <input value={value} />
+                <input value={value} onChange={(e) => setValue(e.target.value)}/>
               </div>
             ) : (
               <div>{item.title}</div>
@@ -42,21 +56,16 @@ function TodoList({ todo, setTodo }) {
 
           {edit === item.id ? (
             <div>
-              <button>Сохранить</button>
+              <Button onClick={() => saveTodo(item.id)}></Button>
             </div>
           ) : (
             <div>
-              <button onClick={() => deleteTodo(item.id)}>Удалить</button>
-              <button onClick={() => editTodo(item.id, item.title)}>
-                Редактировать
-              </button>
+              <Button onClick={() => deleteTodo(item.id)} className="btn">Удалить</Button>
+              <Button onClick={() => editTodo(item.id, item.title)} className="btn">Редактировать</Button>
               {/*нажали Редактировать, отправили item id в функцию editTodo*/}
-              <button onClick={() => statusTodo(item.id)}>
-                Закрыть / Открыть
-              </button>
+              <Button onClick={() => statusTodo(item.id)} className="btn">Закрыть / Открыть </Button>
             </div>
           )}
-          <div>{item.title}</div>
           {/*вывели значение title из todo State*/}
         </div>
       ))}
